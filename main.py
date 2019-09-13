@@ -1,5 +1,9 @@
+import random
+import codecs
+import json
+import os
+
 from dotenv import load_dotenv
-import os, codecs, json
 
 load_dotenv()
 
@@ -25,12 +29,24 @@ emotion_classes = {
 
 words = text.split(' ')
 
-for word in words:
-    found = False
-    for emotion_class in emotion_classes:
-        if word in emotion_classes[emotion_class]:
-            print(emotion_class)
-            found = True
-            break
-    if not found:
-        print("Incorrect!")
+result_image = ''
+
+
+def check_emotion():
+    for word in words:
+        for emotion_class in emotion_classes:
+            if word in emotion_classes[emotion_class]:
+                return emotion_class
+
+
+def emotion_to_image(em_class):
+    rand_img = random.randint(0, len(emotion_images[em_class]) - 1)
+
+    emotion_image = emotion_images[em_class][rand_img]
+
+    return emotion_image
+
+
+if __name__ == '__main__':
+    result = emotion_to_image(check_emotion())
+    print(result)

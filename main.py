@@ -1,5 +1,20 @@
-from pprint import pprint
+from dotenv import load_dotenv
+import os, codecs, json
 
+load_dotenv()
+
+db_path = os.getenv('DB_PATH')
+
+
+def get_db(path: str):
+    with codecs.open(path, 'utf-8', 'r') as file:
+        text_ = file.read()
+        db = json.loads(text_)
+    return db
+
+
+if __name__ == '__main__':
+    pass
 
 text = input("Input your text: ")
 
@@ -9,7 +24,6 @@ emotion_classes = {
 }
 
 words = text.split(' ')
-pprint(words)
 
 for word in words:
     found = False

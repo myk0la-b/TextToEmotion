@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 emotions_db_path = os.getenv('DB_PATH')
+emotions_to_image_path = os.getenv('IMAGES_PATH')
 
 
 def get_db(path: str):
@@ -21,12 +22,16 @@ def get_emotions_db():
     return get_db(emotions_db_path)
 
 
+def get_emotion_to_image_db():
+    return get_db(emotions_to_image_path)
+
+
 if __name__ == '__main__':
     pass
 
 text = input("Input your text: ")
 
-emotion_images = {"sadness": ['sad_img'], "happiness": ['happy_img', 'a', 'f', 'g', 's', 'h']}
+# emotion_images = {"sadness": ['sad_img'], "happiness": ['happy_img', 'a', 'f', 'g', 's', 'h']}
 
 words = text.split(' ')
 
@@ -45,6 +50,7 @@ def check_emotion():
 def emotion_to_image(em_class):
     if em_class is None:
         return None
+    emotion_images = get_emotion_to_image_db()
     rand_img = random.randint(0, len(emotion_images[em_class]) - 1)
 
     emotion_image = emotion_images[em_class][rand_img]

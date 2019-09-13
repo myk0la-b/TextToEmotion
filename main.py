@@ -10,7 +10,7 @@ emotion_classes = {
 words = text.split(' ')
 
 result_image  = ''
-
+ 
 def check_emotion():
     for word in words:
         for emotion_class in emotion_classes:

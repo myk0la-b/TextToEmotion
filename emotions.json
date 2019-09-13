@@ -22,6 +22,8 @@
     "sorrow"
   ],
   "happiness": [
+    "good",
+    "happy",
     "cheerful",
     "contented",
     "delighted",
@@ -201,4 +203,3 @@
     "surprised"
   ]
 }
-

@@ -7,14 +7,18 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-db_path = os.getenv('DB_PATH')
+emotions_db_path = os.getenv('DB_PATH')
 
 
 def get_db(path: str):
-    with codecs.open(path, 'utf-8', 'r') as file:
+    with codecs.open(path, encoding='utf-8', mode='r') as file:
         text_ = file.read()
         db = json.loads(text_)
     return db
+
+
+def get_emotions_db():
+    return get_db(emotions_db_path)
 
 
 if __name__ == '__main__':
@@ -23,9 +27,6 @@ if __name__ == '__main__':
 text = input("Input your text: ")
 
 emotion_images = {"sadness": ['sad_img'], "happiness": ['happy_img', 'a', 'f', 'g', 's', 'h']}
-emotion_classes = {
-    "sadness": ['sad', 'bad', 'sadness'], "happiness": ['happy', 'good']
-}
 
 words = text.split(' ')
 
@@ -33,6 +34,7 @@ result_image = ''
 
 
 def check_emotion():
+    emotion_classes = get_emotions_db()
     for word in words:
         for emotion_class in emotion_classes:
             if word in emotion_classes[emotion_class]:
